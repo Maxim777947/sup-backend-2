@@ -5,12 +5,12 @@ from django.db import models
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-from src.domain.validators.validators import ModelValidator
 from src.models.choice_classes import (
     FeatureChoices,
     ProjectChoices,
     TaskChoices,
 )
+from src.validators.validators import ModelValidator
 
 User = get_user_model()
 

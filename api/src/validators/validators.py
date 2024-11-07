@@ -12,7 +12,7 @@ class DataVerifier:
         return {
             "letters_only": r"^[a-zA-Zа-яА-Я\s]*$",  # Только буквы (латиница и кириллица)
             "letters_space_only": r"^[а-яА-ЯёЁa-zA-Z]+(?:\s[а-яА-ЯёЁa-zA-Z]+)*$",  # Буквы и пробелы
-            "email": r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",  # Email
+            "letters_digits_symbols_no_space": r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",  # Буквы, цифры и спец. символы, без пробела
             "password": r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",  # Пароль
             "letters_digits_symbols": r"^[a-zA-Zа-яА-Я0-9._%+-]+$",  # Буквы, цифры и спец. символы
             "hex_color": r"^\d{6}$",  # 6 цифр для цвета
@@ -50,21 +50,26 @@ class DataVerifier:
         return None
 
     @staticmethod
-    def verify_email(value):
-        """
-        Проверяет строку на наличие валидного email-адреса.
-        """
-        if not re.match(DataVerifier._get_regex_patterns()["email"], value):
-            return "Неверный формат email"
-        return None
-
-    @staticmethod
     def verify_password(value):
         """
         Проверяет, содержит ли пароль минимум 8 символов, включая одну заглавную букву, цифру и спец.символ
         """
         if not re.match(DataVerifier._get_regex_patterns["password"], value):
             return "Пароль должен содержать минимум 8 символов, включая одну заглавную букву, цифру и спец.символ."
+        return None
+
+    @staticmethod
+    def verify_letters_digits_symbols_no_space(value):
+        """
+        Проверяет строку на наличие только букв, цифр и спецсимволов без пробела.
+        """
+        if not re.match(
+            DataVerifier._get_regex_patterns()[
+                "letters_digits_symbols_no_space"
+            ],
+            value,
+        ):
+            return "Допускаются только буквы, цифры и спецсимволы без пробела"
         return None
 
     @staticmethod

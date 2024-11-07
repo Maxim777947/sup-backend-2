@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
+from src.validators.validators import ModelValidator
 
-from ..domain.validators.validators import ModelValidator
 from .choice_classes import MeetStatusChoice
 
 User = get_user_model()
