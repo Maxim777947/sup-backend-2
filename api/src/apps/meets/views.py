@@ -1,14 +1,17 @@
 from pprint import pprint
 
-from django.contrib.auth.models import User
-
 from django.db.utils import IntegrityError
+from django.contrib.auth import get_user_model
+
 
 from django.http import JsonResponse
 from django.shortcuts import render
 from src.apps.custom_view import BaseView
 from src.apps.meets.forms import CreateMeetForm
 from src.domain.meet.dtos import MeetDTO
+
+
+User = get_user_model()
 
 
 class MeetsView(BaseView):
